@@ -2,22 +2,26 @@ var theta = 20;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	background(255);
-	stroke(0);
-	strokeWeight(0.6);
+	background(255, 63, 0);
+	stroke(255);
+	strokeWeight(1);
 	noLoop();
+	frameRate(5);
 	angleMode(DEGREES);
 	translate(0, windowHeight - 50);
 	translate(windowWidth / 2, 0);
+	
+}
+function mouseMoved() {
+	background(255, 63, 0);
 	line(0, 0, 0, -200);
 	translate(0, -200);
 
 	branch(200);
 
 	translate(0, 200);
-	branch(200);	
+	branch(250);	
 }
-
 
 
 function branch(l) {
