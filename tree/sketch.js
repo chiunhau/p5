@@ -1,4 +1,4 @@
-var theta = 20;
+var theta = 20, startL;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -6,24 +6,37 @@ function setup() {
 	stroke(255);
 	strokeWeight(1);
 	noLoop();
-	frameRate(5);
 	angleMode(DEGREES);
+	startL = windowHeight * 0.22;
 	translate(0, windowHeight - 50);
 	translate(windowWidth / 2, 0);
+
+	background(255, 63, 0);
+	line(0, 0, 0, -startL);
+	translate(0, -startL);
+
+	branch(startL);
+
+	translate(0, startL);
+	branch(startL * 1.2);
 	
 }
 function mouseMoved() {
 	background(255, 63, 0);
-	line(0, 0, 0, -200);
-	translate(0, -200);
+	line(0, 0, 0, -startL);
+	line(0, 0, 0, -startL);
+	translate(0, -startL);
 
-	branch(200);
+	branch(startL);
 
-	translate(0, 200);
-	branch(250);	
+	translate(0, startL);
+	branch(startL * 1.2);	
 }
 
-
+function mouseClicked() {
+	noLoop();
+	save();
+}
 function branch(l) {
 	l *= random(0.6, 0.75);
 	if(l > 4) {
