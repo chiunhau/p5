@@ -8,6 +8,6 @@ function touchMoved() {
 }
 
 function touchStart() {
-	/////
 	console.log(touches);
+}
 }
