@@ -3,10 +3,6 @@ function setup() {
 	noStroke();
 }
 
-function draw() {
-	
-}
-
 function touchMoved() {
 	console.log(touches);
 }
