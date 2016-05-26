@@ -6,3 +6,7 @@ function setup() {
 function touchMoved() {
 	console.log(touches);
 }
+
+function touchStart() {
+	console.log(touches);
+}
