@@ -15,4 +15,5 @@ function touchMoved() {
 
 function touchStart() {
 	console.log(touches);
+	background(0, 0, 255);
 }
