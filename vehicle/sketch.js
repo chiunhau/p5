@@ -16,7 +16,7 @@ function draw() {
 }
 
 function mousePressed() {
-	vehicles.push(new Vehicle(mouseX, mouseY, random(5)));
+	vehicles.push(new Vehicle(mouseX, mouseY, random(2,7)));
 }
 
 function Vehicle(x, y, m) {
@@ -24,7 +24,7 @@ function Vehicle(x, y, m) {
 	this.vel = createVector(0, 0);
 	this.acc = createVector(0, 0);
 	this.mass = m;
-	this.maxspeed = 5;
+	this.maxspeed = 30 / this.mass;
 	this.maxforce = 1;
 }
 
@@ -43,7 +43,7 @@ Vehicle.prototype.update = function() {
 Vehicle.prototype.display = function() {
 	noStroke();
 	fill(255);
-	ellipse(this.pos.x, this.pos.y, 10, 10);
+	ellipse(this.pos.x, this.pos.y, this.mass * 5, this.mass * 5);
 };
 
 Vehicle.prototype.arrive = function(target) {
