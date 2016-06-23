@@ -15,7 +15,7 @@ function draw() {
 	});
 }
 
-function mousePressed() {
+function mouseDragged() {
 	vehicles.push(new Vehicle(mouseX, mouseY, random(2,7)));
 }
 
