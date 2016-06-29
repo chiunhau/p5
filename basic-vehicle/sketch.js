@@ -1,21 +1,23 @@
-var vehicles = [], target, moved;
+var vehicles = [], target, vehiclesCreated = false, drawingDone = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(255);
+  background(255, 255, 255, 0);
   noStroke();
-  for(var i = 0; i < 200; i ++) {
-  	vehicles.push(new Vehicle(width / 2, height / 2, 1, random(0.01, 1)));
-  }
+  
   target = createVector(0, 0);
-  target.set(width / 2, height / 2);
-  moved = false;
 }
 
 function draw() {
+	target.set(mouseX, mouseY);
   vehicles.map(function(vehicle) {
   	vehicle.run(target);
   });
+
+  if(drawingDone) {
+  	noLoop();
+  	save();
+  }
 }
 
 function Vehicle(x, y, m, s) {
@@ -24,7 +26,7 @@ function Vehicle(x, y, m, s) {
 	this.acc = createVector(0, 0);
 	this.mass = m;
 	this.maxspeed = s;
-	this.maxforce = 0.1;
+	this.maxforce = 0.2;
 }
 
 Vehicle.prototype.applyForce = function(f) {
@@ -34,11 +36,11 @@ Vehicle.prototype.applyForce = function(f) {
 Vehicle.prototype.follow = function(target) {
 	var desired = p5.Vector.sub(target, this.pos);
 
-	if(desired.mag() > 100) {
+	if(desired.mag() > 50) {
 		desired.setMag(this.maxspeed);
 	}
 	else {
-		desired.setMag(map(desired.mag(), 0, 100, 0, this.maxspeed));
+		desired.setMag(map(desired.mag(), 0, 50, 0, this.maxspeed));
 	}
 	var steer = p5.Vector.sub(desired, this.vel);
 	steer.limit(this.maxforce);
@@ -53,7 +55,7 @@ Vehicle.prototype.udpate = function() {
 };
 
 Vehicle.prototype.render = function() {
-	fill(255, 40, 40);
+	fill(40, 150, 240, 80);
 	ellipse(this.pos.x, this.pos.y, this.mass, this.mass);
 };
 
@@ -68,9 +70,14 @@ Vehicle.prototype.run = function(target) {
 // }
 
 function mouseClicked() {
-	noLoop();
-}
-
-function mouseMoved() {
-	target.set(mouseX, mouseY);
+	if(!vehiclesCreated) {
+		vehicles = [];
+		for(var i = 0; i < 100; i ++) {
+	  	vehicles.push(new Vehicle(mouseX, mouseY, 2, random(1, 2)));
+	  }
+	  vehiclesCreated = true;
+	}
+	else {
+		drawingDone = true;
+	}
 }
