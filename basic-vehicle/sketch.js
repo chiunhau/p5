@@ -1,21 +1,18 @@
-var vehicles = [], target;
+var vehicles = [], target, moved;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
   noStroke();
-  for(var i = 0; i < 120; i ++) {
-  	vehicles.push(new Vehicle(width / 2, height / 2, 2, random(1, 5)));
+  for(var i = 0; i < 200; i ++) {
+  	vehicles.push(new Vehicle(width / 2, height / 2, 1, random(0.01, 1)));
   }
   target = createVector(0, 0);
+  target.set(width / 2, height / 2);
+  moved = false;
 }
 
 function draw() {
-	
-	// fill(255, 0, 0);
-	// ellipse(mouseX, mouseY, 10, 10);
-	target.set(mouseX, mouseY);
-	
   vehicles.map(function(vehicle) {
   	vehicle.run(target);
   });
@@ -27,7 +24,7 @@ function Vehicle(x, y, m, s) {
 	this.acc = createVector(0, 0);
 	this.mass = m;
 	this.maxspeed = s;
-	this.maxforce = 0.2;
+	this.maxforce = 0.1;
 }
 
 Vehicle.prototype.applyForce = function(f) {
@@ -72,4 +69,8 @@ Vehicle.prototype.run = function(target) {
 
 function mouseClicked() {
 	noLoop();
+}
+
+function mouseMoved() {
+	target.set(mouseX, mouseY);
 }
