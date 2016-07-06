@@ -72,7 +72,7 @@ Vehicle.prototype.run = function(target) {
 function mouseClicked() {
 	if(!vehiclesCreated) {
 		vehicles = [];
-		for(var i = 0; i < 100; i ++) {
+		for(var i = 0; i < 50; i ++) {
 	  	vehicles.push(new Vehicle(mouseX, mouseY, 2, random(1, 2)));
 	  }
 	  vehiclesCreated = true;
